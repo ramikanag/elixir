@@ -20,7 +20,7 @@ defmodule Mapp do
     result = sequential_map(list, function)
     IO.puts("Sequential map result: #{result}")
 
-    result2 = parallel_map(result, function)
+    result2 = parallel_map(list, function)
     IO.puts("Parallel map result: #{result2}")
   end
 end
