@@ -18,10 +18,10 @@ defmodule Mapp do
 
   def display_result(list, function) do
     result = sequential_map(list, function)
-    IO.puts("Sequential map result: #{inspect(result)}")
+    IO.puts("Sequential map result: #{result}")
 
     result2 = parallel_map(result, function)
-    IO.puts("Parallel map result: #{inspect(result2)}")
+    IO.puts("Parallel map result: #{result2}")
   end
 end
 
