@@ -14,7 +14,7 @@ defmodule Mapp do
   st=System.os_time()
   def mappar do
     l
-    |>Enum.map(&Task.async(fn-> f.(&1) end))
+    |>Enum.map(&Task.async(fn-> f.(&1)end))
     |>Enum.map(&Task.await/1)
     end
     et=System.os_time()
