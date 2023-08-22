@@ -1,29 +1,30 @@
-defmodule Pm do
-  def map(l,f) do
-    Enum.map(l,f)
+defmodule Mapp do
+  start_time=System.os_time()
+  def sequential_map([head | tail], function) do
+    [function.(head) | sequential_map(tail, function)]
   end
-  def parallelmod(l,f) do
-    l
-    |>Enum.map(&Task.async(fn-> f.(&1)end))
-    |>Enum.map(&Task.await/1)
+  def sequential_map([], function), do: []
+  end_time=System.os_time()
+  IO.puts("Total time for sequential map function=#{end_time-start_time}")
+
+  start_time_parallel=System.os_time()
+  def parallel_map(list, function) do
+    list
+    |> Enum.map(&Task.async(fn -> function.(&1) end))
+    |> Enum.map(&Task.await/1)
+  end
+  end_time_parallel=System.os_time()
+  IO.puts("Total time for parallel map function=#{end_time_parallel-start_time_parallel}")
+
+  def display_result(list, function) do
+    result = sequential_map(list, function)
+    IO.puts("Sequential map result: #{inspect(result)}")
+
+    result2 = parallel_map(result, function)
+    IO.puts("Parallel map result: #{inspect(result2)}")
   end
 end
-l=1..10000
-f=fn x->x*x end
-IO.puts("Time for map fn:")
-st=:os.system_time(:millisecond)
-Pm.map(l,f)
-et=:os.system_time(:millisecond)
-time=et-st
-IO.puts("start time=#{st}")
-IO.puts("end time=#{et}")
-IO.puts("total time=#{time}")
 
-IO.puts("Time for parallel map fn:")
-st=:os.system_time(:millisecond)
-Pm.parallelmod(l,f)
-et=:os.system_time(:millisecond)
-time=et-st
-IO.puts("start time=#{st}")
-IO.puts("end time=#{et}")
-IO.puts("total time=#{time}")
+list = 1..10000
+function = fn x -> x * x end
+Mapp.display_result(list, function)
