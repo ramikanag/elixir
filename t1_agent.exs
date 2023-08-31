@@ -13,7 +13,6 @@ defmodule Mapp do
     sequential_map(list, fn x ->
       Agent.update(pid, &Map.put(&1,x,x*x))
     end)
-    pid
   end
 
   def get(pid) do
