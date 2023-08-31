@@ -40,4 +40,4 @@ defmodule Mapp do
   end
 end
 
-Mapp.display_result(1..10000, fn x -> x * x end)
+Mapp.display_result(1..10000, fn x -> x*x end)
