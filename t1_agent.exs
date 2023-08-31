@@ -23,7 +23,7 @@ defmodule Mapp do
 
   def parallel_map(list,_function) do
     pid=start_link()
-    pid=put(pid,list)
+    _pid=put(pid,list)
   end
 
   def display_result(list, function) do
