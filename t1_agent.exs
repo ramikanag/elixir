@@ -12,7 +12,7 @@ defmodule Mapp do
   def put(pid, list) do
     sequential_map(list, fn x ->
       Agent.update(pid, fn state ->
-        &Mapp.sequential_map(&1,x,fn x->x*x end)   #&Map.put(&1,x,x*x)
+        &Mapp.sequential_map(&1,x,fn x->x*x end)   # Mapp.sequential_map(state,x,fn x->x*x end|&Map.put(&1,x,x*x)
       end)
     end)
   end
